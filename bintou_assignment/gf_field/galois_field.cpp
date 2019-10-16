@@ -4,15 +4,15 @@ using namespace std;
 
 int gf_mul(int a,int b){
 	int  result = a * ( b % 2);
-	int  m = 27;
+	int  m = 1;
 	int  tmp = a;
 	b /= 2;
-	while(b != 0){ 
+	while(b != 0){
 		if( tmp*2 >= 256 ){
 			tmp = tmp << 1;
 			tmp ^= m;
 			tmp ^= 256;
-		} 
+		}
 	else tmp = tmp  << 1 ;
 	result = result ^ ( tmp * ( b%2 ) ); //b为奇数，则加，为偶数，则不加。
 	b = b/ 2;
@@ -40,7 +40,7 @@ int gf_div_qr(int a,int b, int* r){
 	*r = a ;
 	return result;
 }
-
+        4c64                                                                                                                                                                                                                            id
 int gf_egcd(int a, int b){
 	int r0 = 1;
 	int s0 = 0;
@@ -59,4 +59,12 @@ int gf_egcd(int a, int b){
 		s1 = s1 ^ gf_mul(q,s0);
 	}
 	return r0;
+}
+
+int main(){
+	int s;
+	cin>>s;
+	for(int i = 0; i < 256 ; i ++)
+	cout<<gf_egcd(i,s)<<"\t";
+	return 0;
 }
